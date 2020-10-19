@@ -44,4 +44,28 @@ public class StateCensusAnalyzer {
             throw new StateCensusAnalyzerException("Invalid state present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
         }
     }
+
+    public int readStateCodeCSVData() throws StateCensusAnalyzerException{
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(csvFilePath);
+            CsvToBeanBuilder<CSVStateCode> builder = new CsvToBeanBuilder<CSVStateCode>(reader);
+            builder.withType(CSVStateCode.class);
+            builder.withIgnoreLeadingWhiteSpace(true);
+            CsvToBean<CSVStateCode> csvToBean = builder.build();
+
+            int noOfRecords = 0;
+            Iterator<CSVStateCode> StateCensusCSVIterator = csvToBean.iterator();
+            while (StateCensusCSVIterator.hasNext()) {
+                noOfRecords++;
+                CSVStateCode censusData = StateCensusCSVIterator.next();
+                System.out.println(censusData.toString());
+            }
+            return noOfRecords;
+        } catch (IOException e1) {
+            throw new StateCensusAnalyzerException("Invalid path entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
+        } catch (IllegalStateException e2) {
+            throw new StateCensusAnalyzerException("Invalid state present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
+        }
+    }
 }
