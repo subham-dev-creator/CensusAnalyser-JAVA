@@ -12,16 +12,16 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 
-public class StateCensusAnalyser {
+public class StateCensusAnalyzer {
     public Path csvFilePath;
 
     // Constructor
-    public StateCensusAnalyser(Path csvFilePath) {
+    public StateCensusAnalyzer(Path csvFilePath) {
         this.csvFilePath = csvFilePath;
     }
 
     // Returns The number of record in CSV file
-    public int readStateCensusCSVData() {
+    public int readStateCensusCSVData() throws StateCensusAnalyzerException {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
@@ -38,9 +38,10 @@ public class StateCensusAnalyser {
                 System.out.println(censusData.toString());
             }
             return noOfRecords;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e1) {
+            throw new StateCensusAnalyzerException("Invalid path entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
+        } catch (IllegalStateException e2) {
+            throw new StateCensusAnalyzerException("Invalid state present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
         }
-        return 0;
     }
 }

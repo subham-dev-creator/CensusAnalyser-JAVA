@@ -1,6 +1,6 @@
 package com.training.censusanalyser;
 
-public class StateCensusAnalyzerException extends  Exception{
+ public class StateCensusAnalyzerException extends Exception{
     enum ExceptionType {
         INCORRECT_PATH, INCORRECT_STATE, INCORRECT_DELIMITER, INCORRECT_CSV_HEADER;
     }
