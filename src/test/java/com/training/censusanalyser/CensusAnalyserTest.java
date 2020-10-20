@@ -13,14 +13,14 @@ import static org.junit.Assert.assertTrue;
 public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\test\\resources\\IndiaStateCensusData.csv";
-    private static final String WRONG_FILE_TYPE = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\IndiaStateCensusData.csv";
+    private static final String WRONG_FILE_TYPE = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\Example.xlsx";
     private static final String WRONG_DELIMITER_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongDelimiterIndiaStateCensusData.csv";
     private static final String WRONG_HEADER_STATE_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongHeaderIndiaStateCensusData.csv";
 
     private static final String STATE_CODE_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\IndiaStateCode.csv";
     private static final String WRONG_STATE_CODE_CSV_FILE_PATH = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\test\\resources\\IndiaStateCode.csv";
-    private static final String WRONG_STATE_CODE_FILE_TYPE = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\IndiaStateCode.csv";
-    private static final String WRONG_DELIMITER_STATE_CODE_CSV_FILE_PATH  = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongDelimiterIndiaStateCode.csv";
+    private static final String WRONG_STATE_CODE_FILE_TYPE = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\Example.xlsx";
+    private static final String WRONG_DELIMITER_STATE_CODE_CSV_FILE_PATH  = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\StateCodeCSVInvalidDelimiter.csv";
     private static final String WRONG_HEADER_STATE_CODE_CSV_FILE_PATH  = "C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongHeaderIndiaStateCode.csv";
 
     // TC 1.1 IndiaCensusData

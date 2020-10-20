@@ -63,9 +63,15 @@ public class StateCensusAnalyzer {
             }
             return noOfRecords;
         } catch (IOException e1) {
-            throw new StateCensusAnalyzerException("Invalid path entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
+            throw new StateCensusAnalyzerException("Invalid PATH Entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
         } catch (IllegalStateException e2) {
-            throw new StateCensusAnalyzerException("Invalid state present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
+            throw new StateCensusAnalyzerException("Invalid STATE Present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
         }
+    }
+
+    public static void main(String[] args) throws StateCensusAnalyzerException {
+        Path p = Paths.get("C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongDelimiterIndiaStateCode.csv");
+        StateCensusAnalyzer sa = new StateCensusAnalyzer(p);
+        sa.readStateCodeCSVData();
     }
 }
