@@ -25,13 +25,8 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-
-            int noOfRecords = 0;
             Iterator<CSVStateCensus> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCensus.class);
-            while (StateCensusCSVIterator.hasNext()) {
-                noOfRecords++;
-                CSVStateCensus censusData = StateCensusCSVIterator.next();
-            }
+            int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
         } catch (IOException e1) {
@@ -45,12 +40,8 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            int noOfRecords = 0;
             Iterator<CSVStateCode> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCode.class);//csvToBean.iterator();
-            while (StateCensusCSVIterator.hasNext()) {
-                noOfRecords++;
-                CSVStateCode censusData = StateCensusCSVIterator.next();
-            }
+            int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
         } catch (IOException e1) {
@@ -71,5 +62,10 @@ public class StateCensusAnalyzer {
             throw new StateCensusAnalyzerException("Invalid state present",
                     StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
         }
+    }
+    private <E> int getCount(Iterator<E> csvIterator) {
+        Iterable<E> csvIterable = () -> csvIterator;
+        int noOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+        return noOfEnteries;
     }
 }
