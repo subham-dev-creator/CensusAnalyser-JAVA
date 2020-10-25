@@ -30,10 +30,8 @@ public class StateCensusAnalyzer {
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
-        } catch (IOException e1) {
-            throw new StateCensusAnalyzerException("Invalid path entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
-        } catch (IllegalStateException e2) {
-            throw new StateCensusAnalyzerException("Invalid state present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
+        } catch (IOException | CSVException e) {
+            throw new StateCensusAnalyzerException("Invalid path entered", StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
         }
     }
 
@@ -46,10 +44,8 @@ public class StateCensusAnalyzer {
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
-        } catch (IOException e1) {
-            throw new StateCensusAnalyzerException("Invalid PATH Entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
-        } catch (IllegalStateException e2) {
-            throw new StateCensusAnalyzerException("Invalid STATE Present", StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
+        } catch (IOException | CSVException e) {
+            throw new StateCensusAnalyzerException("Invalid path entered", StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
         }
     }
 
