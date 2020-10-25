@@ -25,7 +25,8 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            Iterator<CSVStateCensus> StateCensusCSVIterator = new OpenCSVBuilder().getCSVFileIterator(reader,CSVStateCensus.class);
+            ICSVBuilder<CSVStateCensus> builder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<CSVStateCensus> StateCensusCSVIterator = builder.getCSVFileIterator(reader,CSVStateCensus.class);
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
@@ -40,7 +41,8 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            Iterator<CSVStateCode> StateCensusCSVIterator = new OpenCSVBuilder().getCSVFileIterator(reader,CSVStateCode.class);
+            ICSVBuilder<CSVStateCode> builder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<CSVStateCode> StateCensusCSVIterator = builder.getCSVFileIterator(reader,CSVStateCode.class);
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
