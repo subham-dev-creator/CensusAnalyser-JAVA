@@ -25,7 +25,7 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            Iterator<CSVStateCensus> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCensus.class);
+            Iterator<CSVStateCensus> StateCensusCSVIterator = new OpenCSVBuilder().getCSVFileIterator(reader,CSVStateCensus.class);
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
@@ -40,7 +40,7 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            Iterator<CSVStateCode> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCode.class);//csvToBean.iterator();
+            Iterator<CSVStateCode> StateCensusCSVIterator = new OpenCSVBuilder().getCSVFileIterator(reader,CSVStateCode.class);
             int noOfRecords = getCount(StateCensusCSVIterator);
             System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
@@ -51,18 +51,6 @@ public class StateCensusAnalyzer {
         }
     }
 
-    private <E> Iterator<E> getCSVIterator(Reader reader, Class<E> csvClass) throws StateCensusAnalyzerException {
-        try {
-            CsvToBeanBuilder<E> builder = new CsvToBeanBuilder<E>(reader);
-            CsvToBean<E> csvToBean = builder.withType(csvClass)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
-            return csvToBean.iterator();
-        } catch (IllegalStateException e) {
-            throw new StateCensusAnalyzerException("Invalid state present",
-                    StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
-        }
-    }
     private <E> int getCount(Iterator<E> csvIterator) {
         Iterable<E> csvIterable = () -> csvIterator;
         int noOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
