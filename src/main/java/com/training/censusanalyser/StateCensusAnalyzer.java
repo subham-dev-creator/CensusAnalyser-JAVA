@@ -25,18 +25,14 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            CsvToBeanBuilder<CSVStateCensus> builder = new CsvToBeanBuilder<CSVStateCensus>(reader);
-            builder.withType(CSVStateCensus.class);
-            builder.withIgnoreLeadingWhiteSpace(true);
-            CsvToBean<CSVStateCensus> csvToBean = builder.build();
 
             int noOfRecords = 0;
-            Iterator<CSVStateCensus> StateCensusCSVIterator = csvToBean.iterator();
+            Iterator<CSVStateCensus> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCensus.class);
             while (StateCensusCSVIterator.hasNext()) {
                 noOfRecords++;
                 CSVStateCensus censusData = StateCensusCSVIterator.next();
-                System.out.println(censusData.toString());
             }
+            System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
         } catch (IOException e1) {
             throw new StateCensusAnalyzerException("Invalid path entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
@@ -49,18 +45,13 @@ public class StateCensusAnalyzer {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(csvFilePath);
-            CsvToBeanBuilder<CSVStateCode> builder = new CsvToBeanBuilder<CSVStateCode>(reader);
-            builder.withType(CSVStateCode.class);
-            builder.withIgnoreLeadingWhiteSpace(true);
-            CsvToBean<CSVStateCode> csvToBean = builder.build();
-
             int noOfRecords = 0;
-            Iterator<CSVStateCode> StateCensusCSVIterator = csvToBean.iterator();
+            Iterator<CSVStateCode> StateCensusCSVIterator = getCSVIterator(reader,CSVStateCode.class);//csvToBean.iterator();
             while (StateCensusCSVIterator.hasNext()) {
                 noOfRecords++;
                 CSVStateCode censusData = StateCensusCSVIterator.next();
-                System.out.println(censusData.toString());
             }
+            System.out.println("Num Of Records : " + noOfRecords);
             return noOfRecords;
         } catch (IOException e1) {
             throw new StateCensusAnalyzerException("Invalid PATH Entered",StateCensusAnalyzerException.ExceptionType.INCORRECT_PATH);
@@ -69,9 +60,16 @@ public class StateCensusAnalyzer {
         }
     }
 
-    public static void main(String[] args) throws StateCensusAnalyzerException {
-        Path p = Paths.get("C:\\Users\\I524735\\IdeaProjects\\CensusAnalyser-JAVA\\src\\main\\resources\\WrongDelimiterIndiaStateCode.csv");
-        StateCensusAnalyzer sa = new StateCensusAnalyzer(p);
-        sa.readStateCodeCSVData();
+    private <E> Iterator<E> getCSVIterator(Reader reader, Class<E> csvClass) throws StateCensusAnalyzerException {
+        try {
+            CsvToBeanBuilder<E> builder = new CsvToBeanBuilder<E>(reader);
+            CsvToBean<E> csvToBean = builder.withType(csvClass)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            return csvToBean.iterator();
+        } catch (IllegalStateException e) {
+            throw new StateCensusAnalyzerException("Invalid state present",
+                    StateCensusAnalyzerException.ExceptionType.INCORRECT_STATE);
+        }
     }
 }

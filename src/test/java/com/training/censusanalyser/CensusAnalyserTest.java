@@ -102,7 +102,7 @@ public class CensusAnalyserTest {
         try {
             StateCensusAnalyzer censusAnalyzer = new StateCensusAnalyzer(Paths.get(STATE_CODE_CSV_FILE_PATH));
             int noOfEntries = censusAnalyzer.readStateCodeCSVData();
-            Assert.assertEquals(7, noOfEntries);
+            Assert.assertEquals(37, noOfEntries);
         } catch (Exception e) {
             e.printStackTrace();
         }
